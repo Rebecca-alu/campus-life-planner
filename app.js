@@ -123,7 +123,7 @@ function isValidRecord(record) {
         /^rec_\d{4,}$/.test(record.id) &&
         typeof record.title === "string" &&
         record.title.length <= 100 &&
-        !patterns.title.test(record.title) &&
+        patterns.title.test(record.title) &&
         !patterns.repeatedSpaces.test(record.title) &&
         !patterns.duplicateWords.test(record.title) &&
         isValidDate(record.dueDate) &&
