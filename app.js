@@ -9,9 +9,6 @@ const DEFAULT_SETTINGS = {
     readingSpeed: 30
 };
 
-let records = loadRecords();
-let settings = loadSettings();
-
 const form = document.getElementById("recordForm");
 const titleInput = document.getElementById("title");
 const dateInput = document.getElementById("dueDate");
@@ -38,6 +35,8 @@ const patterns = {
     time: /\b\d{2}:\d{2}\b/,
     tagSearch: /^@tag:(.+)$/i
 };
+let records = loadRecords();
+let settings = loadSettings();
 
 function loadRecords() {
     try {
