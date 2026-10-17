@@ -1,0 +1,50 @@
+{
+    "version": 1,
+    "records": [
+        {
+            "id": "rec_0001",
+            "title": "Study for exams",
+            "dueDate": "2026-10-16",
+            "duration": 120,
+            "tag": "Study",
+            "createdAt": "2026-10-16T07:00:00.000Z",
+            "updatedAt": "2026-10-16T07:00:00.000Z"
+        },
+        {
+            "id": "rec_0002",
+            "title": "Attend coding club",
+            "dueDate": "2026-10-17",
+            "duration": 90,
+            "tag": "Club",
+            "createdAt": "2026-10-15T07:00:00.000Z",
+            "updatedAt": "2026-10-15T07:00:00.000Z"
+        },
+        {
+            "id": "rec_0003",
+            "title": "Complete group project",
+            "dueDate": "2026-10-18",
+            "duration": 180,
+            "tag": "Study",
+            "createdAt": "2026-10-14T07:00:00.000Z",
+            "updatedAt": "2026-10-14T07:00:00.000Z"
+        },
+        {
+            "id": "rec_0004",
+            "title": "Attend basketball practice",
+            "dueDate": "2026-10-19",
+            "duration": 60,
+            "tag": "Sports",
+            "createdAt": "2026-10-13T07:00:00.000Z",
+            "updatedAt": "2026-10-13T07:00:00.000Z"
+        },
+        {
+            "id": "rec_0005",
+            "title": "Submit assignment",
+            "dueDate": "2026-10-20",
+            "duration": 75,
+            "tag": "Academic",
+            "createdAt": "2026-10-12T07:00:00.000Z",
+            "updatedAt": "2026-10-12T07:00:00.000Z"
+        }
+    ]
+}

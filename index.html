@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view point" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple planner for campus tasks and events.">
+    <title>Campus Life Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skin to main content</a>
+
+    <header class="site-header">
+        <h1>Campus Life Planner</h1>
+        <p>Organize your studies, events and campus life.</p>
+    </header>
+    <nav aria-label="Main navigation">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#records">My Tasks</a>
+        <a href="#task-form">Add Task</a>
+        <a href="#settings">Settings</a>
+        <a href="#about">About</a>
+    </nav>
+    <main id="main">
+        <section id="dashboard" aria-labelledby="dashboard-title">
+            <h2 id="dashboard-title">Your Dashboard</h2>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <h3>Total tasks</h3>
+                    <p id="totalTasks">0</p>
+                </article>
+                <article class="stat-card">
+                    <h3>Total duration</h3>
+                    <p id="totalDuration">0 minutes</p>
+                </article>
+                <article class="stat-card">
+                    <h3>Top tag</h3>
+                    <p id="topTap">None</p>
+                </article>
+                <article class="stat-card">
+                    <h3>Last 7 days</h3>
+                    <p id="weeklyTotal">0 minutes</p>
+                </article>
+            </div>
+
+            <h3>Weekly activity</h3>
+            <div id="weeklyChart" class="chart" role="img" aria-label="Task duration for the last seven days"></div>
+
+            <h3>Duratio target</h3>
+            <p id="targetMessage" role="status" aria-live="polite">
+                Set a target in Settings.
+            </p>
+            <p id="overTargetMessage" role="alert" aria-live="assertive"></p>
+        </section>
+
+        <section id="task-form" aria-labelledby="form-title">
+            <h2 id="form-title">Add a Task or Event</h2>
+
+            <form id="recordForm">
+                <input type="hidden" id="editId">
+                <label for="title">Task or event title</label>
+                <input id="title" name="title" type="text" maxlength="100" required
+                    placeholder="Example: Study for exams">
+
+                <label for="dueDate">Due date</label>
+                <input id="dueDate" name="dueDate" type="required">
+
+                <label for="duration">Duration (minutes)</label>
+                <input id="duration" name="duration" type="number" min="1" max="100000" step="1" required
+                    placeholder="Example: 60">
+
+                <label for="tag">Tag</label>
+                <input id="tag" name="tag" type="text" maxlength="40" required placeholder="Study, Sports, Club">
+
+                <button type="submit" id="saveButton">Add Task</button>
+                <button type="button" id="cancelEdit" hidden>Cancel Edit</button>
+            </form>
+
+            <p id="formMessage" role="status" aria-live="polite"></p>
+        </section>
+
+        <section id="records" aria-labelledby="records-title">
+            <h2 id="records-title">My Tasks and Events</h2>
+
+            <label for="search">Search using a regural expression</label>
+
+            <input id="search" type="search" placeholder="Example: ^@tag:Study">
+
+            <label class="check-label" for="caseSensitive">
+                <input id="caseSensitive" type="checkbox">
+                Case-sensitive search
+            </label>
+            <p class="help">
+                Search matches titles, tap and dates.
+                Example: @tag:Study filters by tag. Use [to test an invalid pattern.
+            </p>
+            <p id="searchMessage" role="status" aria-live="polite"></p>
+
+            <div class="sort-controls">
+                <label for="sortBy">Sort records</label>
+                <select id="sortBy">
+                    <option value="date-asc">Due date: earliest first</option>
+                    <option value="date-desc">Due date: latest first</option>
+                    <option value="title-asc">Title: A to Z</option>
+                    <option value="title-desc">Title: Z to A</option>
+                    <option value="duration-asc">Duration: shortest first</option>
+                    <option value="duration-desc">Duration: longest first</option>
+                </select>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <caption>Campus Tasks and Events</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Due date</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Tag</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordList"></tbody>
+                </table>
+            </div>
+            <p id="emptyMessage">No tasks yet. Add your first task above.</p>
+        </section>
+
+        <section id="settings" aria-labelledby="settings-title">
+            <h2 id="settings-title"> Settings and Data</h2>
+            <label for="durationCap">Duration target (minutes)</label>
+            <input id="durationCap" type="number" min="1" max="1000000" step="1" value="600">
+            <button id="saveSettings" type="button">Save Target</button>
+
+            <label for="readingSpeed">Estimated reading speed (pages/hour)</label>
+            <input id="readingSpeed" type="number" min="1" max="1000" step="1" value="30">
+            <p id="conversionResult">60 minutes = 1 hour.</p>
+
+            <div class="button-group">
+                <button id="exportButton" type="button">Export JSON</button>
+
+                <label class="file-label" for="importFile">Import JSON</label>
+                <input id="importFile" type="file" accept=".json, application/json">
+            </div>
+            <p id="settingsMessage" role="status" aria-live="polite"></p>
+        </section>
+
+        <section id="about" aria-labelledby="about-title">
+            <h2 id="about-title">About This Project</h2>
+            <p>
+                Campus Life Planner helps students organize their academic tasks,
+                campus events and study time. It was built with HTML, CSS and Javascript as a responsive, accessible
+                learning project.
+            </p>
+            <p>
+                Developer: UMURAGWA Rebecca <br>
+                Email: r.benegusen@alustudent <br>
+                GitHub: <a href="https://github.com/Rebecca-alu" target="_blank" rel="noopener noreferrer">My GitHub
+                    Profile</a>
+            </p>
+            <p>Replace the example contact information with your own.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Campus Life Planner. Built for student productivity.</p>
+    </footer>
+</body>
+
+</html>

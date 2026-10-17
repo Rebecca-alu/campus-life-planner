@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <title>Campus Planner Tests</title>
+</head>
+
+<body>
+    <main>
+        <h1>Campus Life Planner - Tests</h1>
+        <p id="summary" role="status" aria-live="polite"></p>
+        <ul id="results"></ul>
+    </main>
+
+    <script>
+        "use strict";
+        const tests = [];
+
+        function test(name, actual, expected) {
+            tests.push({
+                name,
+                passed: actual === expected
+            });
+        }
+
+        const titlePattern = /^\S(?:.*\S)?$/;
+        const repeatedSpaces = /\s{2,}/;
+        const numberPattern = /^[1-9]\d*$/;
+        const datePattern = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+        const tagPattern = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+        const duplicateWords = /\b(\w+)\s+\1\b/i;
+
+        function valiDate(value) {
+            if (!datePattern.test(value)) return false;
+
+            const [year, month, day] = value.split("-").map(Number);
+            const date = new Date(Date.UTC(year, month - 1, day));
+
+            return date.getUTCFullYear() === year &&
+                date.getUTCMonth() === month - 1 &&
+                date.getUTCDate() === day;
+        }
+
+        test("Accept a normal title",
+            titlePattern.test("Study for exams"), true
+        );
+        test("Reject leading spaces",
+            titlePattern.test(" Study"), false
+        );
+        test("Reject trailing spaces",
+            titlePattern.test("Study "), false
+        );
+        test("Reject repeated spaces",
+            repeatedSpaces.test("Study  exams"), true
+        );
+        test("Detect duplicate words",
+            duplicateWords.test("Study study"), true
+        );
+        test("Allow different words",
+            duplicateWords.test("Study exams"), false
+        );
+        test("Accept a positive duration",
+            numberPattern.test("60"), true
+        );
+        test("Reject zero duration",
+            numberPattern.test("0"), false
+        );
+        test("Reject a decimal duration",
+            numberPattern.test("30.5"), false
+        );
+        test("Accept a valid date",
+            valiDate("2026-10-16"), true
+        );
+        test("Reject an impossible date",
+            valiDate("2026-02-30"), false
+        );
+        test("Reject an invalid month",
+            valiDate("2026-13-01"), false
+        );
+        test("Accept a simple tag",
+            tagPattern.test("Study"), true
+        );
+        test("Accept a hyphenated tag",
+            tagPattern.test("Sports-Club"), true
+        );
+        test("Reject numbers in tags",
+            tagPattern.test("Study123"), false
+        );
+
+        let invalidRegexRejected = false;
+
+        try {
+            new RegExp("[");
+        } catch {
+            invalidRegexRejected = true;
+        }
+
+        test("Reject malformed regex",
+            invalidRegexRejected, true
+        );
+
+        const results = document.getElementById("results");
+        let passed = 0;
+        tests.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent =
+                `${item.passed ? "PASS" : "FAIL"} - ${item.name}`;
+
+            results.appendChild(li);
+
+            if (item.passed) passed++;
+        });
+
+        document.getElementById("summary").textContent =
+            `${passed} of ${tests.length} tests passed.`;
+    </script>
+</body>
+
+</html>
