@@ -25,7 +25,7 @@ Section 4: How to run
 
 Website Link
 
-file:///Users/apple/campus-life-planner/index.html
+http://127.0.0.1:5500/index.html
 
 Demo video : This demo helps you to understand how the website works
 
