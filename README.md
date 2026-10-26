@@ -25,7 +25,7 @@ Section 4: How to run
 
 Website Link
 
-http://127.0.0.1:5500/index.html
+https://rebecca-alu.github.io/campus-life-planner/
 
 Demo video : This demo helps you to understand how the website works
 
